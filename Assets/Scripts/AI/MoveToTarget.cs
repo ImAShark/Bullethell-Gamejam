@@ -32,7 +32,11 @@ public class MoveToTarget : MonoBehaviour
 
     private void RotateTowards(GameObject view)//calculates the rotation to look at
     {
-        transform.right = view.transform.position - transform.position;
+        Vector3 diff = view.transform.position - transform.position;
+        diff.Normalize();
+
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)//stops in target area
