@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MoveToTarget : MonoBehaviour
@@ -10,7 +11,10 @@ public class MoveToTarget : MonoBehaviour
     private float speed = 1;
     [SerializeField]
     private bool isMelee = false;
+    private bool isAtTarget = false;
     private GameObject target;
+
+    public event Action<bool> RangeChange;
 
     void Start()//sets tag
     {
@@ -39,11 +43,13 @@ public class MoveToTarget : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//stops in target area
+    private void OnTriggerStay2D(Collider2D collision)//stops in target area
     {
         if (!isMelee)
         {
             speed = 0;
+            isAtTarget = true;
+            RangeChange(isAtTarget);
         }
         
     }
@@ -53,6 +59,8 @@ public class MoveToTarget : MonoBehaviour
         if (!isMelee)
         {
             speed = 1;
+            isAtTarget = false;
+            RangeChange(isAtTarget);
         }
     }
 }
