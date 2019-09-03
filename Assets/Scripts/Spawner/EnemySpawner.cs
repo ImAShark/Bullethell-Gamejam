@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject EnemyS, EnemyM;
-    [SerializeField] private float timer, reset = 1;
+    [SerializeField] private float reset = 1;
+    private float timer;
 
     void Update()
     {

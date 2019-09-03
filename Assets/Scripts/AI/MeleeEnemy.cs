@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-public class ShootEnemy : MonoBehaviour
+public class MeleeEnemy : MonoBehaviour
 {
-    float shottimer = 0;
+    float hittimer = 0;
     private Transform shotpoint;
     [SerializeField] private GameObject bullet;
     private bool isInRange = false;
@@ -18,26 +17,26 @@ public class ShootEnemy : MonoBehaviour
 
     void Update()
     {
-        Shoot();
-        shottimer += 1 * Time.deltaTime;    
+        Hit();
+        hittimer += 1 * Time.deltaTime;
     }
 
-    void Shoot()
+    void Hit()
     {
         if (Canfire(0.7f))
         {
             if (isInRange)
             {
                 Instantiate(bullet, shotpoint.position, shotpoint.rotation);
-            }            
+            }
         }
     }
 
     bool Canfire(float timer)
     {
-        if (shottimer >= timer)
+        if (hittimer >= timer)
         {
-            shottimer = 0;
+            hittimer = 0;
             return true;
 
         }
@@ -58,6 +57,4 @@ public class ShootEnemy : MonoBehaviour
             isInRange = false;
         }
     }
-
 }
-

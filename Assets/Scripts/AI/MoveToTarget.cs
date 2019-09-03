@@ -21,7 +21,7 @@ public class MoveToTarget : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag(tag);
         var hasTarget = GameObject.Find("Player").GetComponent<Health>();
-        hasTarget.Dies += RemoveTarget;
+        hasTarget.DiesP += RemoveTarget;
     }
 
     void Update()
@@ -49,20 +49,32 @@ public class MoveToTarget : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)//stops in target area
+    private void OnTriggerStay2D(Collider2D col)//stops in target area
     {
-        if (!isMelee)
+        if (!isMelee && col.tag == "TargetArea")
         {
             speed = 0;
             isAtTarget = true;
             RangeChange(isAtTarget);
         }
-        
-    }
+        else if (isMelee && col.tag == "TargetAreaM")
+        {
+            speed = 0;
+            isAtTarget = true;
+            RangeChange(isAtTarget);
+        }
 
-    private void OnTriggerExit2D(Collider2D collision)//continues outside of target area
+    }   
+
+    private void OnTriggerExit2D(Collider2D col)//continues outside of target area
     {
-        if (!isMelee)
+        if (!isMelee && col.tag == "TargetArea")
+        {
+            speed = 1;
+            isAtTarget = false;
+            RangeChange(isAtTarget);
+        }
+        else if (isMelee && col.tag == "TargetAreaM")
         {
             speed = 1;
             isAtTarget = false;
@@ -70,11 +82,8 @@ public class MoveToTarget : MonoBehaviour
         }
     }
 
-    private void RemoveTarget(string temp)
+    private void RemoveTarget()
     {
-        if (temp == "p")
-        {
             targetAlive = false;
-        }
     }
 }
