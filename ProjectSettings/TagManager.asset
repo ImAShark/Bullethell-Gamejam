@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TargetArea
-  - spots
+  - Enemy
+  - TargetAreaM
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MoveToTarget : MonoBehaviour
@@ -10,16 +11,25 @@ public class MoveToTarget : MonoBehaviour
     private float speed = 1;
     [SerializeField]
     private bool isMelee = false;
+    private bool isAtTarget = false;
+    private bool targetAlive = true;
     private GameObject target;
+
+    public event Action<bool> RangeChange;
 
     void Start()//sets tag
     {
         target = GameObject.FindGameObjectWithTag(tag);
+        var hasTarget = GameObject.Find("Player").GetComponent<Health>();
+        hasTarget.DiesP += RemoveTarget;
     }
 
     void Update()
     {
-        GoToTarget(target);
+        if (targetAlive)
+        {
+            GoToTarget(target);
+        }        
     }
 
     private void GoToTarget(GameObject targ)//makes it look towards the target and move towards there
@@ -39,20 +49,41 @@ public class MoveToTarget : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//stops in target area
+    private void OnTriggerStay2D(Collider2D col)//stops in target area
     {
-        if (!isMelee)
+        if (!isMelee && col.tag == "TargetArea")
         {
             speed = 0;
+            isAtTarget = true;
+            RangeChange(isAtTarget);
         }
-        
-    }
+        else if (isMelee && col.tag == "TargetAreaM")
+        {
+            speed = 0;
+            isAtTarget = true;
+            RangeChange(isAtTarget);
+        }
 
-    private void OnTriggerExit2D(Collider2D collision)//continues outside of target area
+    }   
+
+    private void OnTriggerExit2D(Collider2D col)//continues outside of target area
     {
-        if (!isMelee)
+        if (!isMelee && col.tag == "TargetArea")
         {
             speed = 1;
+            isAtTarget = false;
+            RangeChange(isAtTarget);
         }
+        else if (isMelee && col.tag == "TargetAreaM")
+        {
+            speed = 1;
+            isAtTarget = false;
+            RangeChange(isAtTarget);
+        }
+    }
+
+    private void RemoveTarget()
+    {
+            targetAlive = false;
     }
 }
