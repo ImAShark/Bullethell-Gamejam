@@ -87,7 +87,7 @@ public class SpotLightS : MonoBehaviour
             }
             else if (Random.Range(1, 3) == 2)
             {
-                spots[i].GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+                spots[i].GetComponent<Renderer>().material.color = new Color(0, 1, 0, 1);
             }
             else
             {
