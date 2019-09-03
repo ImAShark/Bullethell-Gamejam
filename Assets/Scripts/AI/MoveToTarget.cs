@@ -29,7 +29,7 @@ public class MoveToTarget : MonoBehaviour
         if (targetAlive)
         {
             GoToTarget(target);
-        }        
+        }
     }
 
     private void GoToTarget(GameObject targ)//makes it look towards the target and move towards there

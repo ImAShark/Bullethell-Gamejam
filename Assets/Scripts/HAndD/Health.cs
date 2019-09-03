@@ -10,18 +10,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private bool isPlayer = false;
     private bool isAlive = true;
-
     public event Action DiesP;
 
-    void Update()
-    {
-        if (!isAlive && Time.timeScale < 0.01f)
-        {
-            Time.timeScale = Time.timeScale - 0.02f;
-            Debug.Log(Time.timeScale);
-        }
-        
-    }   
+
 
     public void DealDamage(int damage)
     {
