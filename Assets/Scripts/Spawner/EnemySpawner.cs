@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject EnemyS, EnemyM;
+    [SerializeField] private GameObject EnemyS, EnemyM, EnemyD;
     [SerializeField] private float reset = 1;
     private float timer;
+    private float dChance = 1;
 
     void Update()
     {
         if (timer <= 0)
         {
-            SpawnEnemy();
+            CalculateChance();
             timer = reset;
         }
         timer = timer - Time.deltaTime;
@@ -35,6 +36,21 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             Debug.Log("Big oof");
+        }
+    }
+
+    private void CalculateChance()
+    {
+        float d = Mathf.Floor(Random.Range(dChance, 50));
+        if (dChance == 50 || d == 50)
+        {
+            Instantiate(EnemyD, transform.position, Quaternion.identity);
+            dChance = 1;
+        }
+        else if (dChance <= 49)
+        {
+            dChance += 1;
+            SpawnEnemy();
         }
     }
 }

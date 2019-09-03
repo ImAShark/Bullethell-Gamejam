@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Hp1, Hp2, Hp3;
+    private GameObject Hp1, Hp2, Hp3, Hp4, Hp5;
     private int health;
 
     void Start()
@@ -19,13 +19,19 @@ public class HealthBar : MonoBehaviour
         switch (health)
         {
             case 0:
-                Hp3.SetActive(false);
+                Hp1.SetActive(false);
                 break;
             case 1:
                 Hp2.SetActive(false);
                 break;
             case 2:
-                Hp1.SetActive(false);
+                Hp3.SetActive(false);
+                break;
+            case 3:
+                Hp4.SetActive(false);
+                break;
+            case 4:
+                Hp5.SetActive(false);
                 break;
 
 
