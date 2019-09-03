@@ -6,13 +6,14 @@ public class DamageBullet : MonoBehaviour
 {
     [SerializeField] private string objTag;
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("YEET");
 
         if (col.gameObject.tag == objTag)
         {
             col.gameObject.SendMessage("DealDamage", 1);
+            Destroy(gameObject);
         }
     }
 }

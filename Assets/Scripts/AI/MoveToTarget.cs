@@ -12,6 +12,7 @@ public class MoveToTarget : MonoBehaviour
     [SerializeField]
     private bool isMelee = false;
     private bool isAtTarget = false;
+    private bool targetAlive = true;
     private GameObject target;
 
     public event Action<bool> RangeChange;
@@ -19,11 +20,16 @@ public class MoveToTarget : MonoBehaviour
     void Start()//sets tag
     {
         target = GameObject.FindGameObjectWithTag(tag);
+        var hasTarget = GameObject.Find("Player").GetComponent<Health>();
+        hasTarget.Dies += RemoveTarget;
     }
 
     void Update()
     {
-        GoToTarget(target);
+        if (targetAlive)
+        {
+            GoToTarget(target);
+        }        
     }
 
     private void GoToTarget(GameObject targ)//makes it look towards the target and move towards there
@@ -61,6 +67,14 @@ public class MoveToTarget : MonoBehaviour
             speed = 1;
             isAtTarget = false;
             RangeChange(isAtTarget);
+        }
+    }
+
+    private void RemoveTarget(string temp)
+    {
+        if (temp == "p")
+        {
+            targetAlive = false;
         }
     }
 }
