@@ -8,16 +8,28 @@ public class Health : MonoBehaviour
     [SerializeField]
     private int health = 1;
     [SerializeField]
-    private bool isPlayer = false;
+    private bool isPlayer = false, isMelee = false;
     private bool isAlive = true;
 
     public event Action DiesP;
+    public event Action<bool> DiesE;
 
     void Update()
     {
         if (!isAlive && Time.timeScale > 0.01f)
         {
             Time.timeScale = Time.timeScale - 0.01f;
+        }
+        
+    }   
+
+    public void DealDamage(int damage)
+    {
+        health = health - damage;
+
+        if (health <= 0)
+        {
+            Die();
         }
         
     }
@@ -29,18 +41,11 @@ public class Health : MonoBehaviour
             DiesP();
             isAlive = false;
         }
-        
-        Destroy(gameObject);
-    }
-
-    public void DealDamage(int damage)
-    {
-        health = health - damage;
-
-        if (health <= 0)
+        else
         {
-            Die();
+            DiesE(isMelee);
         }
-        
+
+        Destroy(gameObject);
     }
 }

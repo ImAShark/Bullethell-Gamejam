@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   isPlayer: 0
+  isMelee: 1
 --- !u!114 &3781289420566103171
 MonoBehaviour:
   m_ObjectHideFlags: 0
