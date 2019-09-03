@@ -303,6 +303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  Hp1: {fileID: 0}
+  Hp2: {fileID: 0}
+  Hp3: {fileID: 0}
   isPlayer: 1
 --- !u!114 &6538138328921443829
 MonoBehaviour:
