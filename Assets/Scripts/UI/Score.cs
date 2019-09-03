@@ -42,7 +42,11 @@ public class Score : MonoBehaviour
 
     private void SaveScore()
     {
-        PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(scoreTotal));
+        if (PlayerPrefs.GetInt("HighScore") < scoreTotal)
+        {
+            PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(scoreTotal));
+        }
+        
     }
 
 }
