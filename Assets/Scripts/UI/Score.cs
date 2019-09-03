@@ -30,6 +30,7 @@ public class Score : MonoBehaviour
             Time.timeScale = 0;
             gameOver.SetActive(true);
             gameObject.transform.position = new Vector2(675, 635);
+            SaveScore();
         }
         
     }
@@ -37,6 +38,11 @@ public class Score : MonoBehaviour
     private void StopScore()
     {
         pLives = false;
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(scoreTotal));
     }
 
 }
