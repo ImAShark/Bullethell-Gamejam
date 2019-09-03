@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class shooting : MonoBehaviour
 {
+    AudioSource AS;
     float shottimer = 0;
     private Vector3 target;
     private Camera camera;
@@ -11,6 +12,7 @@ public class shooting : MonoBehaviour
     [SerializeField] private GameObject bullet;
     private void Start()
     {
+        AS = GetComponent<AudioSource>();
         camera = Camera.main;
         shotpoint = transform.GetChild(0);
     }
@@ -39,6 +41,7 @@ public class shooting : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
+                AS.Play();
                 Instantiate(bullet, shotpoint.position, shotpoint.rotation);
             }
         }
