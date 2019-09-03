@@ -10,6 +10,7 @@ public class ToMain : MonoBehaviour
     {
         if (Input.anyKey)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("Main");
         }
 
