@@ -8,17 +8,17 @@ public class Health : MonoBehaviour
     [SerializeField]
     private int health = 1;
     [SerializeField]
-    private bool isPlayer = false, isMelee = false;
+    private bool isPlayer = false;
     private bool isAlive = true;
 
     public event Action DiesP;
-    public event Action<bool> DiesE;
 
     void Update()
     {
-        if (!isAlive && Time.timeScale > 0.01f)
+        if (!isAlive && Time.timeScale < 0.01f)
         {
-            Time.timeScale = Time.timeScale - 0.01f;
+            Time.timeScale = Time.timeScale - 0.02f;
+            Debug.Log(Time.timeScale);
         }
         
     }   
@@ -40,10 +40,6 @@ public class Health : MonoBehaviour
         {
             DiesP();
             isAlive = false;
-        }
-        else
-        {
-            DiesE(isMelee);
         }
 
         Destroy(gameObject);

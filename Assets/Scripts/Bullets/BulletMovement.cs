@@ -10,7 +10,6 @@ public class BulletMovement : MonoBehaviour
     void Update()
     {
         
-            print("!");
             transform.Translate(Vector2.up * speed*Time.deltaTime,Space.Self);
 
         

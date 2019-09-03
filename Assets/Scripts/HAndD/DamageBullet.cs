@@ -8,8 +8,6 @@ public class DamageBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("YEET");
-
         if (col.gameObject.tag == objTag)
         {
             col.gameObject.SendMessage("DealDamage", 1);
