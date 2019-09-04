@@ -29,8 +29,8 @@ public class Score : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOver.SetActive(true);
-            gameObject.transform.position = new Vector2(675, 635);
             SaveScore();
+            gameObject.SetActive(false);
         }
         
     }
@@ -42,6 +42,7 @@ public class Score : MonoBehaviour
 
     private void SaveScore()
     {
+        PlayerPrefs.SetInt("Score", Mathf.RoundToInt(scoreTotal));
         if (PlayerPrefs.GetInt("HighScore") < scoreTotal)
         {
             PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(scoreTotal));

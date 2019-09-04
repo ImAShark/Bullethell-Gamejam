@@ -41,13 +41,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void CalculateChance()
     {
-        float d = Mathf.Floor(Random.Range(dChance, 50));
-        if (dChance == 50 || d == 50)
+        float d = Mathf.Floor(Random.Range(dChance, 20));
+        if (dChance == 20 || d == 20)
         {
             Instantiate(EnemyD, transform.position, Quaternion.identity);
             dChance = 1;
         }
-        else if (dChance <= 49)
+        else if (dChance <= 19)
         {
             dChance += 1;
             SpawnEnemy();
